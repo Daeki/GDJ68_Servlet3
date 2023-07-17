@@ -84,7 +84,7 @@ public class BankBookDAO {
 		//1. DB 연결
 		Connection con = DBConnector.getConnection();
 		//2. 쿼리문 작성
-		String sql="INSERT INTO BANKBOOK VALUES (BANK_SEQ.NEXTVAL,?,?,?)";
+		String sql="INSERT INTO BANKBOOK VALUES (BANK_SEQ.NEXTVAL,?,?,?, ?)";
 		
 		//3. 쿼리문 미리 전송
 		PreparedStatement st = con.prepareStatement(sql);

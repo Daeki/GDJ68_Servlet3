@@ -12,6 +12,7 @@
 	<form action="./add.do" method="post">
 		상품명<input type="text" name="bookName"><br>
 		이자율<input type="text" name="bookRate"><br>
+		<textarea rows="" cols="" name="bookContents"></textarea>
 		
 		<p>
 			판매가능 <input type="radio" value="1" checked name="bookSale"><br>

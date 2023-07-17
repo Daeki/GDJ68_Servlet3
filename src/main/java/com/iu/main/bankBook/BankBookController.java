@@ -43,6 +43,8 @@ public class BankBookController extends HttpServlet {
 			
 			String path = request.getPathInfo();
 			String viewName="/WEB-INF/views/errors/notFound.jsp";
+			boolean flag = true;
+			
 			if(path.equals("/list.do")) {
 				System.out.println("목록");
 				ArrayList<BankBookDTO> ar =bankBookDAO.bankBookList();
@@ -74,8 +76,9 @@ public class BankBookController extends HttpServlet {
 					bankBookDTO.setBookSale(Integer.parseInt(request.getParameter("bookSale")));
 					
 					int result = bankBookDAO.bankBookAdd(bankBookDTO);
-					request.setAttribute("result", result);
-					viewName="/WEB-INF/views/commons/result.jsp";
+					//request.setAttribute("result", result);
+					flag=false;
+					viewName="./list.do";
 				}else {
 					viewName="/WEB-INF/views/bankbook/add.jsp";
 				}
@@ -93,7 +96,8 @@ public class BankBookController extends HttpServlet {
 					bankBookDTO.setBookNum(Long.parseLong(request.getParameter("bookNum")));
 					int result = bankBookDAO.bankBookUpdate(bankBookDTO);
 					request.setAttribute("result", result);
-					viewName="/WEB-INF/views/commons/result.jsp";
+					flag=false;
+					viewName="./detail.do?bookNum="+bankBookDTO.getBookNum();
 					
 				}else {
 					String bookNum = request.getParameter("bookNum");
@@ -105,12 +109,28 @@ public class BankBookController extends HttpServlet {
 				}
 				
 			}else if(path.equals("/delete.do")) {
+				
+				BankBookDTO bankBookDTO = new BankBookDTO();
+				bankBookDTO.setBookNum(Long.parseLong(request.getParameter("bookNum")));
+				
+				int result = bankBookDAO.bankBookDelete(bankBookDTO);
+				
+				request.setAttribute("result", result);
+				viewName="/WEB-INF/views/commons/result.jsp";
 				System.out.println("삭제");
 			}
+			System.out.println("Redirect");
+			System.out.println(flag);
+			System.out.println(viewName);
+			if(flag) {
+				//foward	
+				RequestDispatcher view = request.getRequestDispatcher(viewName);
+				view.forward(request, response);
+			}else {
+			//redirect
+				response.sendRedirect(viewName);
+			}
 			
-				
-			RequestDispatcher view = request.getRequestDispatcher(viewName);
-			view.forward(request, response);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
