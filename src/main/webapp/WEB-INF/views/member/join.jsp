@@ -13,7 +13,7 @@
 <section class="container mt-5">	
 	<h1 class="my-4">Join Page</h1>
 	
-	<form action="">
+	<form action="./join.do" method="post">
 	<div class="mb-3">
 	  <label for="id" class="form-label">ID</label>
 	  <input type="text" name="id" class="form-control" id="id" placeholder="ID를 입력하세요">
