@@ -37,7 +37,7 @@
 		      <nav>
 		      	<ul class="nav">
 		      		<li class="nav-item text-white me-3">로그인</li>
-		      		<li class="nav-item text-white me-3">회원가입</li>
+		      		<li class="nav-item text-white me-3"><a href="/member/join.do">회원가입</a></li>
 		      	</ul>
 		      </nav>
 		      
